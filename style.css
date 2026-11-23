@@ -1,0 +1,505 @@
+/* ═══════════════════════════════════════════
+   🎂  Birthday Card — Stylesheet (with full RWD)
+   ═══════════════════════════════════════════ */
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+:root {
+  --clr-bg:        #fff5f5;
+  --clr-primary:   #e8537a;
+  --clr-secondary: #ff8fab;
+  --clr-accent:    #ffc2d1;
+  --clr-gold:      #f5c542;
+  --clr-text:      #4a3040;
+  --clr-text-light:#7a5f6f;
+  --clr-white:     #ffffff;
+  --font-serif:    'Noto Serif TC', 'Georgia', serif;
+  --font-script:   'Dancing Script', cursive;
+  --radius:        16px;
+  --shadow:        0 8px 32px rgba(232, 83, 122, .15);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-serif);
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  overflow-x: hidden;
+  line-height: 1.8;
+}
+
+/* ── Confetti Canvas ── */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+
+/* ═══════════════════════════════════════════
+   封面
+   ═══════════════════════════════════════════ */
+.cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh; /* svh = safe viewport height on mobile */
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255,194,209,.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(255,143,175,.4) 0%, transparent 50%),
+    linear-gradient(135deg, #fff5f5 0%, #ffe0ec 50%, #ffd6e0 100%);
+  overflow: hidden;
+  padding: 2rem 1.5rem;
+}
+
+.cover-content {
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+}
+
+.cover-subtitle {
+  font-size: clamp(.9rem, 3vw, 1.5rem);
+  color: var(--clr-text-light);
+  letter-spacing: .3em;
+  margin-bottom: .5rem;
+}
+
+.cover-title {
+  font-size: clamp(3.5rem, 16vw, 8rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--clr-primary), #c94b7a, var(--clr-gold));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease infinite;
+  line-height: 1.2;
+}
+
+.cover-wish {
+  font-size: clamp(1.2rem, 4.5vw, 2.5rem);
+  margin-top: .8rem;
+  color: var(--clr-primary);
+  font-weight: 700;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* 進場按鈕 */
+.btn-enter {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: .85rem 2.4rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 3.5vw, 1.15rem);
+  font-weight: 700;
+  color: var(--clr-white);
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(232, 83, 122, .35);
+  transition: transform .3s, box-shadow .3s;
+  /* 防止 iOS 上按鈕太小 */
+  min-height: 48px;
+  touch-action: manipulation;
+}
+
+.btn-enter:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 36px rgba(232, 83, 122, .45);
+}
+
+.btn-enter:active {
+  transform: scale(.97);
+}
+
+/* 漂浮愛心 */
+.floating-hearts {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  bottom: -60px;
+  font-size: 1.6rem;
+  opacity: 0;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+  10%  { opacity: .7; }
+  90%  { opacity: .4; }
+  100% { transform: translateY(-110vh) rotate(360deg) scale(.4); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════
+   通用 Section
+   ═══════════════════════════════════════════ */
+.section {
+  padding: 5rem 1.5rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(1.4rem, 4.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--clr-primary);
+  margin-bottom: 2.5rem;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--clr-accent);
+  border-radius: 2px;
+  margin: .6rem auto 0;
+}
+
+/* 淡入 */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeInUp .9s ease forwards;
+}
+.delay-1 { animation-delay: .35s; }
+.delay-2 { animation-delay: .7s; }
+.delay-3 { animation-delay: 1.05s; }
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glass card */
+.glass {
+  background: rgba(255, 255, 255, .65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, .5);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* 主內容顯示 */
+.hidden-main { display: none; }
+.show-main {
+  display: block;
+  animation: fadeInUp .6s ease;
+}
+
+/* ═══════════════════════════════════════════
+   祝福文字區
+   ═══════════════════════════════════════════ */
+.message-section {
+  display: flex;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at top, rgba(255,194,209,.35), transparent 60%),
+    var(--clr-bg);
+}
+
+.message-section .card {
+  max-width: 760px;
+  width: 100%;
+  padding: 3rem 2.8rem;
+}
+
+.message-text {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  line-height: 2.2;
+  color: var(--clr-text);
+  text-align: justify;
+}
+
+.message-text p {
+  margin-bottom: 1.4em;
+}
+
+.message-text p:last-child {
+  margin-bottom: 0;
+}
+
+.message-closing {
+  font-weight: 700;
+  color: var(--clr-primary) !important;
+  font-size: 1.08em !important;
+}
+
+.message-sign {
+  text-align: right;
+  font-size: .88rem;
+  color: var(--clr-text-light);
+  margin-top: 1.2rem;
+  letter-spacing: .05em;
+}
+
+/* ═══════════════════════════════════════════
+   照片牆
+   ═══════════════════════════════════════════ */
+.gallery-section {
+  background: linear-gradient(180deg, var(--clr-bg) 0%, #fff0f3 100%);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.photo-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--clr-white);
+  box-shadow: var(--shadow);
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+
+.photo-card:hover {
+  transform: translateY(-8px) rotate(-1deg);
+  box-shadow: 0 16px 48px rgba(232, 83, 122, .22);
+}
+
+.photo-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+
+.photo-card:hover .photo-wrap img {
+  transform: scale(1.06);
+}
+
+.photo-caption {
+  padding: .9rem 1.1rem;
+  font-size: .9rem;
+  color: var(--clr-text-light);
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════
+   便條留言板
+   ═══════════════════════════════════════════ */
+.notes-section {
+  background:
+    radial-gradient(ellipse at 80% 50%, rgba(245,197,66,.15), transparent 50%),
+    var(--clr-bg);
+}
+
+.notes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sticky-note {
+  width: min(480px, 90vw);
+  min-height: 200px;
+  padding: 2rem 2rem;
+  border-radius: 6px;
+  box-shadow: 3px 4px 12px rgba(0,0,0,.12);
+  transform: rotate(var(--rotate, -1deg));
+  transition: transform .3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.sticky-note:nth-child(1) { --rotate: -3deg; }
+.sticky-note:nth-child(2) { --rotate:  2deg; }
+.sticky-note:nth-child(3) { --rotate: -1.5deg; }
+
+.sticky-note:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.note-pink   { background: #ffdfeb; }
+.note-yellow { background: #fff8c5; }
+.note-blue   { background: #d6eeff; }
+
+.note-from {
+  font-size: .85rem;
+  color: var(--clr-text-light);
+  margin-bottom: .6rem;
+}
+
+.note-content {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════════
+   結尾
+   ═══════════════════════════════════════════ */
+.ending-section {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at center, rgba(255,194,209,.5), transparent 70%),
+    var(--clr-bg);
+  padding: 4rem 1.5rem;
+}
+
+.ending-content {
+  text-align: center;
+}
+
+.ending-emoji {
+  font-size: clamp(2rem, 7vw, 3rem);
+  margin-bottom: 1rem;
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-18px); }
+}
+
+.ending-title {
+  font-family: var(--font-script);
+  font-size: clamp(2rem, 8vw, 5rem);
+  color: var(--clr-primary);
+  margin-bottom: .5rem;
+}
+
+.ending-subtitle {
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  color: var(--clr-text-light);
+}
+
+.cake-emoji {
+  font-size: clamp(3rem, 10vw, 5rem);
+  margin-top: 2rem;
+  animation: pulse 2.5s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+/* ═══════════════════════════════════════════
+   RWD — Tablet（≤ 900px）
+   ═══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* 3 張照片時最後一張置中 */
+  .gallery .photo-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .message-section .card {
+    padding: 2.5rem 2rem;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RWD — Mobile（≤ 600px）
+   ═══════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .section {
+    padding: 3.5rem 1rem;
+  }
+
+  /* 封面 */
+  .cover {
+    padding: 2rem 1rem;
+  }
+
+  /* 信件文字 */
+  .message-section .card {
+    padding: 1.8rem 1.3rem;
+  }
+
+  .message-text {
+    text-align: left; /* 窄螢幕 justify 不好看，改 left */
+  }
+
+  /* 照片：單欄 */
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* 覆蓋 tablet 規則 */
+  .gallery .photo-card:last-child:nth-child(odd) {
+    grid-column: auto;
+    max-width: 100%;
+  }
+
+  /* 便條：min() 已處理寬度，僅取消旋轉 */
+  .sticky-note {
+    transform: none !important;
+  }
+
+  .sticky-note:hover {
+    transform: scale(1.02) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   RWD — 超小螢幕（≤ 380px）
+   ═══════════════════════════════════════════ */
+@media (max-width: 380px) {
+  .cover-title {
+    font-size: 3.2rem;
+  }
+
+  .btn-enter {
+    padding: .8rem 1.8rem;
+  }
+}

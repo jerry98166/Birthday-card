@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎂 媽媽，生日快樂！</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ✨ 紙花背景 Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+
+  <!-- ═══════ 開場封面 ═══════ -->
+  <section id="cover" class="section cover">
+    <div class="cover-content">
+      <p class="cover-subtitle fade-in">獻給最愛的</p>
+      <h1 class="cover-title fade-in delay-1">媽媽</h1>
+      <p class="cover-wish fade-in delay-2">🎂 生日快樂 🎂</p>
+      <button id="enter-btn" class="btn-enter fade-in delay-3" aria-label="打開卡片">
+        打開卡片 💌
+      </button>
+    </div>
+    <div class="floating-hearts" aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══════ 主內容 ═══════ -->
+  <main id="main-content" class="hidden-main">
+
+    <!-- ── 區塊 1：祝福文字 ── -->
+    <section class="section message-section reveal">
+      <div class="card glass">
+        <h2 class="section-title">🌸 給媽媽的話 🌸</h2>
+        <div class="message-text">
+          <p>阿母，生日快樂。</p>
+          <p>趁著今天是屬於妳的日子，我想靜下心來，把平常在嘴邊卻不常說出口的心裡話寫給妳。</p>
+          <p>這一路走來，我知道妳心裡承受了許多外人看不見的重量與煎熬。面對生命裡那些猝不及防的風雨和考驗，妳總是習慣把眼淚和委屈往肚子裡吞，轉過身來，卻還是努力把最堅強、最安穩的一面留給我們。很多時候看著妳默默忙碌、默默操心的背影，其實我都很心疼，也深深佩服妳這份不輕易被擊倒的韌性。謝謝妳一直這麼努力地撐起這個家，謝謝妳用最溫柔也最堅定的方式，守護著身邊每一個人。</p>
+          <p>新的一歲，我不求妳永遠都要當那個無堅不摧、什麼事都自己扛的大人。我想對妳說，妳已經為這個家付出太多、做得非常好了，接下來，真的可以允許自己偶爾軟弱、偶爾偷懶一下。累的時候就好好休息，心裡覺得悶、覺得委屈的時候，也別再一個人硬撐，隨時都可以跟我們說，讓我們陪著妳一起分擔。</p>
+          <p>人生的傷痛與遺憾或許需要很長的時間才能慢慢撫平，我們不急，未來的日子還長，我會一直陪在妳身邊，陪妳慢慢走、好好過。從今天起，希望妳能把重心多放回自己身上一點，去吃想吃的東西、去做讓自己開心的事，不用總是先替別人著想。只願妳接下來的每一天，都能吃得下、睡得安穩，身體健健康康、平平安安，心裡慢慢找回平靜與光亮，那就是我們全家人最大的心願。</p>
+          <p class="message-closing">謝謝妳成為我的媽媽。生日快樂，我永遠愛妳。</p>
+          <p class="message-sign">孟麟　2026/11/24</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 區塊 2：照片牆（3 張，依序 1→2→3）── -->
+    <section class="section gallery-section reveal">
+      <h2 class="section-title">📸 我們的回憶 📸</h2>
+      <div class="gallery">
+        <div class="photo-card">
+          <div class="photo-wrap">
+            <img src="photos/1.jpeg" alt="照片一">
+          </div>
+        </div>
+        <div class="photo-card">
+          <div class="photo-wrap">
+            <img src="photos/2.jpg" alt="照片二">
+          </div>
+        </div>
+        <div class="photo-card">
+          <div class="photo-wrap">
+            <img src="photos/3.jpg" alt="照片三">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 區塊 3：家人的祝福 ── -->
+    <section class="section notes-section reveal">
+      <h2 class="section-title">💬 家人的祝福 💬</h2>
+      <div class="notes-grid">
+        <!-- 妙妙的便條 -->
+        <div class="sticky-note note-yellow">
+          <p class="note-from">— 來自 妙妙</p>
+          <p class="note-content">
+            姨 祝您生日快乐呀🎂🎊<br><br>
+            最近也很久没与您和叔叔联系，但心中一直记挂，与您相处时的美好都还在心中细细留存。几个月过去，台湾天气也变冷了吧，要多添衣保暖，工作不要太累，该休息就好好休息。<br><br>
+            愿您往后的日子平安顺遂，可以常被幸福与喜悦包围，但无论顺逆，我们一直都会陪在您身边🤗<br><br>
+            再次祝阿姨生日快乐～🎂
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 區塊 4：結尾 ── -->
+    <section class="section ending-section reveal">
+      <div class="ending-content">
+        <p class="ending-emoji">🎂🎉🎈</p>
+        <h2 class="ending-title">Happy Birthday, Mom!</h2>
+        <p class="ending-subtitle">我們永遠愛你 ❤️</p>
+        <div class="cake-emoji" aria-hidden="true">🎂</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
